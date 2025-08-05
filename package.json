@@ -1,0 +1,23 @@
+{
+  "name": "playwright-page-object-generator",
+  "version": "1.0.0",
+  "description": "A tool that generates Playwright Page Object Model tests using MCP",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test-basic-sdk.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-code": "latest",
+    "dotenv": "^16.6.1"
+  },
+  "keywords": [
+    "playwright",
+    "mcp",
+    "page-object-model",
+    "test-automation"
+  ],
+  "author": "",
+  "license": "MIT"
+}
