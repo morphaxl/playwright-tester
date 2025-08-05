@@ -64,7 +64,17 @@ export CLAUDE_CODE_USE_VERTEX=1
 
 ## Usage
 
-### 1. Create a Configuration File
+### 1. Setup Playwright MCP (One-time setup)
+
+```bash
+# Add Playwright MCP server to Claude Code
+claude mcp add playwright npx @playwright/mcp@latest
+
+# Verify it's connected
+claude mcp list
+```
+
+### 2. Create a Configuration File
 
 Create a markdown file with your page configuration:
 
@@ -79,31 +89,34 @@ description: Description of what this page does
 Any additional context about the page...
 ```
 
-### 2. Run the Generator
+### 3. Generate Page Object Model
 
-You have two options:
-
-#### Option A: Without MCP (Default - Faster)
-Uses Claude's knowledge to generate Page Object Models without visiting the page:
+Simply run:
 
 ```bash
 node index.js your-config.md
-# or
+```
+
+This will automatically:
+1. Use the Claude Code SDK to invoke Claude
+2. Claude will use Playwright MCP to navigate to the actual page
+3. Take a real DOM snapshot of the page
+4. Generate accurate Page Object Model with exact selectors
+5. Save the files to `generated-auto/yourpagename/`
+
+**Example:**
+```bash
+node index.js example-config.md
+```
+
+**Alternative:** If you prefer the quick version without visiting the page:
+```bash
 node index-without-mcp.js your-config.md
 ```
 
-#### Option B: With Playwright MCP (More Accurate)
-Actually visits the page using Playwright browser automation to analyze real DOM:
+### 4. Check Generated Files
 
-```bash
-node index-with-mcp.js your-config.md
-```
-
-**Note**: The MCP version requires Chrome/Chromium installed and may take longer.
-
-### 3. Check Generated Files
-
-The tool will create either a `generated` directory (without MCP) or `generated-mcp` directory (with MCP) containing:
+The tool will create a `generated-auto` directory containing:
 - `pages/` - Page Object Model classes
 - `tests/` - Sample test files
 - `elements.md` - List of identified elements

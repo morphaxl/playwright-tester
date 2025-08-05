@@ -1,1 +1,0 @@
-Let me check what Playwright MCP tools are actually available by looking at the tool list. It seems the exact tool names might be different. Let me try using the Task tool to find and use the correct Playwright tools:
